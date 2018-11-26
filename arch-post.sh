@@ -71,10 +71,7 @@ install_multilib_repo() {
 
 install_xorg() {
 	echo "## Installing Xorg"
-	sudo pacman -Sy --noconfirm xorg-server xorg-server-utils xorg-xinit mesa libtxc_dxtn
-	if [[ `uname -m` == x86_64 ]]; then
-		sudo pacman -S --noconfirm lib32-libtxc_dxtn
-	fi
+	sudo pacman -Sy --noconfirm xorg-server xorg-xinit mesa
 }
 
 install_video_drivers() {
@@ -248,7 +245,7 @@ install_desktop_environment() {
 	sudo pacman -S --noconfirm mate mate-extra pulseaudio
 
 	echo "exec mate-session" > ~/.xinitrc
-	sudo pacman -S --noconfirm network-manager-applet mate-disk-utility gnome-icon-theme
+	sudo pacman -S --noconfirm network-manager-applet gnome-icon-theme
 
 	echo "Settings lock-screen background image to solid black"
 cat <<-'EOF' | sudo tee /usr/share/glib-2.0/schemas/mate-background.gschema.override
@@ -264,7 +261,7 @@ EOF
 	mkdir -p ~/.icons/gnome/24x24/places
 	wget -O ~/.icons/gnome/24x24/places/start-here.png http://i.imgur.com/vBpJDs7.png
 
-	pacaur -S --noedit --noconfirm adwaita-x-dark-and-light-theme
+	pacaur -S --noedit --noconfirm flat-remix-git
 }
 
 check_notroot
@@ -320,4 +317,3 @@ do
 		;;
     esac
 done
-
